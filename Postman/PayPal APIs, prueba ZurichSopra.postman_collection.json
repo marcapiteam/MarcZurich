@@ -1,0 +1,423 @@
+{
+	"info": {
+		"_postman_id": "6f00467b-d529-474b-8ee0-d65ea8b7643e",
+		"name": "PayPal APIs, prueba ZurichSopra",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21968960",
+		"_collection_link": "https://qa4444-8615.postman.co/workspace/6a751db1-6024-4ef2-984f-987e294bc0ed/collection/21968960-6f00467b-d529-474b-8ee0-d65ea8b7643e?action=share&source=collection_link&creator=21968960"
+	},
+	"item": [
+		{
+			"name": "Generador datos cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Datos del Facturador\", function() {",
+							"     var jsonData = pm.response.json();",
+							"    pm.environment.set(\"name_facturador\", jsonData[0].name);",
+							"    pm.environment.set(\"surname_facturador\", jsonData[0].surname);",
+							"    pm.environment.set(\"surname2_facturador\", jsonData[0].surname2);",
+							"    pm.environment.set(\"address_facturador\", jsonData[0].address);",
+							"    pm.environment.set(\"address_number_facturador\", jsonData[0].address_number);",
+							"    pm.environment.set(\"municipality_facturador\", jsonData[0].municipality);",
+							"    pm.environment.set(\"province_facturador\", jsonData[1].facturador);",
+							"    pm.environment.set(\"address_zipcode_facturador\", jsonData[0].address_zipcode);",
+							"    pm.environment.set(\"email_facturador\", jsonData[0].email);",
+							"    pm.environment.set(\"phonenumber_facturador\", jsonData[0].phonenumber);",
+							"});",
+							"",
+							"pm.test(\"Datos del Destinatario\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"name_destinatario\", jsonData[1].name);",
+							"    pm.environment.set(\"surname_destinatario\", jsonData[1].surname);",
+							"    pm.environment.set(\"address_destinatario\", jsonData[1].address);",
+							"    pm.environment.set(\"municipality_destinatario\", jsonData[1].municipality);",
+							"    pm.environment.set(\"province_destinatario\", jsonData[1].province);",
+							"    pm.environment.set(\"address_zipcode_destinatario\", jsonData[1].address_zipcode);",
+							"    pm.environment.set(\"email_destinatario\", jsonData[1].email);",
+							"    pm.environment.set(\"phonenumber_destinatario\", jsonData[1].phonenumber);",
+							"});",
+							"",
+							"pm.test(\"Datos del Envio\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"name_envio\", jsonData[2].name);",
+							"    pm.environment.set(\"surname_envio\", jsonData[2].surname);",
+							"    pm.environment.set(\"address_envio\", jsonData[2].address);",
+							"    pm.environment.set(\"municipality_envio\", jsonData[2].municipality);",
+							"    pm.environment.set(\"province_envio\", jsonData[2].province);",
+							"    pm.environment.set(\"address_envio\", jsonData[2].address_zipcode);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.clear();"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.generadordni.es/v2/profiles/person",
+					"protocol": "http",
+					"host": [
+						"api",
+						"generadordni",
+						"es"
+					],
+					"path": [
+						"v2",
+						"profiles",
+						"person"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generar el Access Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Token\", function() {",
+							"     var jsonData = pm.response.json();",
+							"    pm.environment.set(\"access_token\", jsonData.access_token);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "EMnAWe06ioGtouJs7gLYT9chK9-2jJ--7MKRXpI8FesmY_2Kp-d_7aCqff7M9moEJBvuXoBO4clKtY0v",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "AUv8rrc_P-EbP2E0mpb49BV7rFt3Usr-vdUZO8VGOnjRehGHBXkSzchr37SYF2GNdQFYSp72jh5QUhzG",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"description": "The credential type to exchange for an access token.",
+							"type": "text"
+						},
+						{
+							"key": "ignoreCache",
+							"value": "true",
+							"description": "A new token is issued ignoring the previously issued and still not expired token.",
+							"type": "text"
+						},
+						{
+							"key": "return_authn_schemes",
+							"value": "true",
+							"description": "Lists user authentication options and returns a first-party access token to authenticate an end user. Valid for all grant types except the `authzcode` authorization code, which indicates that the user is already authenticated.",
+							"type": "text"
+						},
+						{
+							"key": "return_client_metadata",
+							"value": "true",
+							"description": "Lists client metadata attributes. Valid for all grant types.",
+							"type": "text"
+						},
+						{
+							"key": "return_unconsented_scopes",
+							"value": "true",
+							"description": "Lists unconsented scopes between the user and client. Valid for all grant types except `client_credentials`.",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/oauth2/token",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"oauth2",
+						"token"
+					]
+				},
+				"description": "Shows user profile information. Filters the response by a schema. Supported schema value is `paypalv1.1`."
+			},
+			"response": []
+		},
+		{
+			"name": "Crear número de factura",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"OK. Número de factura\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('invoice_number');",
+							"    pm.environment.set(\"invoice_number\", jsonData.invoice_number);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/v2/invoicing/generate-next-invoice-number",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"invoicing",
+						"generate-next-invoice-number"
+					]
+				},
+				"description": "Generates the next invoice number that is available to the merchant. The next invoice number uses the prefix and suffix from the last invoice number and increments the number by one. For example, the next invoice number after `INVOICE-1234` is `INVOICE-1235`."
+			},
+			"response": []
+		},
+		{
+			"name": "Generar datos de factura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verificar datos\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('id');",
+							"    pm.environment.set(\"invoice_id\", jsonData.id);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.",
+						"type": "text"
+					},
+					{
+						"key": "PayPal-Request-Id",
+						"value": "A v4 style guid",
+						"description": "The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.",
+						"type": "text"
+					},
+					{
+						"key": "Prefer",
+						"value": "return=representation",
+						"description": "The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"detail\": {\n        \"invoice_number\": \"{{invoice_number}}\",\n        \"invoice_date\": \"2022-02-04\",\n        \"payment_term\": {\n            \"term_type\": \"NET_10\",\n            \"due_date\": \"2022-02-14\"\n        },\n        \"currency_code\": \"USD\",\n        \"reference\": \"<The reference data. Includes a post office (PO) number.>\",\n        \"note\": \"<A note to the invoice recipient. Also appears on the invoice notification email.>\",\n        \"terms_and_conditions\": \"<The general terms of the invoice. Can include return or cancellation policy and other terms and conditions.>\",\n        \"memo\": \"<A private bookkeeping note for merchant.>\"\n    },\n    \"invoicer\": {\n        \"name\": {\n            \"given_name\": \"{{name_facturador}}\",\n            \"surname\": \"{{surname_facturador}}\"\n        },\n        \"address\": {\n            \"address_line_1\": \"{{address_facturador}}\",\n            \"address_line_2\": \"{{address_number_facturador}}\",\n            \"admin_area_2\": \"{{municipality_facturador}}\",\n            \"admin_area_1\": \"{{province_facturador}}\",\n            \"postal_code\": \"{{address_zipcode_facturador}}\",\n            \"country_code\": \"ES\"\n        },\n        \"phones\": [\n            {\n                \"country_code\": \"034\",\n                \"national_number\": \"{{phonenumber_facturador}}\",\n                \"phone_type\": \"MOBILE\"\n            }\n        ],\n        \"website\": \"www.example.com\",\n        \"tax_id\": \"XX-XXXXXXX\",\n        \"logo_url\": \"https://example.com/logo.png\",\n        \"additional_notes\": \"<Any additional information. Includes business hours.>\"\n    },\n    \"primary_recipients\": [\n        {\n            \"billing_info\": {\n                \"name\": {\n                    \"given_name\": \"{{name_destinatario}}\",\n                    \"surname\": \"{{surname_destinatario}}\"\n                },\n                \"address\": {\n                    \"address_line_1\": \"{{address_destinatario}}\",\n                    \"admin_area_2\": \"{{municipality_destinatario}}\",\n                    \"admin_area_1\": \"{{province_destinatario}}\",\n                    \"postal_code\": \"{{address_zipcode_destinatario}}\",\n                    \"country_code\": \"ES\"\n                },\n                \"email_address\": \"{{email_destinatario}}\",\n                \"phones\": [\n                    {\n                        \"country_code\": \"034\",\n                        \"national_number\": \"{{phonenumber_destinatario}}\",\n                        \"phone_type\": \"MOBILE\"\n                    }\n                ],\n                \"additional_info_value\": \"add-info\"\n            },\n            \"shipping_info\": {\n                \"name\": {\n                    \"given_name\": \"{{name_envio}}\",\n                    \"surname\": \"{{surname_envio}}\"\n                },\n                \"address\": {\n                    \"address_line_1\": \"{{address_eenvio}}\",\n                    \"admin_area_2\": \"{{municipality_envio}}\",\n                    \"admin_area_1\": \"{{province_envio}}\",\n                    \"postal_code\": \"{{address_zipcode_envio}}\",\n                    \"country_code\": \"ES\"\n                }\n            }\n        }\n    ],\n    \"items\": [\n        {\n            \"name\": \"Yoga Mat\",\n            \"description\": \"Elastic mat to practice yoga.\",\n            \"quantity\": \"1\",\n            \"unit_amount\": {\n                \"currency_code\": \"USD\",\n                \"value\": \"50.00\"\n            },\n            \"tax\": {\n                \"name\": \"Sales Tax\",\n                \"percent\": \"7.25\"\n            },\n            \"discount\": {\n                \"percent\": \"5\"\n            },\n            \"unit_of_measure\": \"QUANTITY\"\n        },\n        {\n            \"name\": \"Yoga t-shirt\",\n            \"quantity\": \"1\",\n            \"unit_amount\": {\n                \"currency_code\": \"USD\",\n                \"value\": \"10.00\"\n            },\n            \"tax\": {\n                \"name\": \"Sales Tax\",\n                \"percent\": \"7.25\"\n            },\n            \"discount\": {\n                \"amount\": {\n                    \"currency_code\": \"USD\",\n                    \"value\": \"5.00\"\n                }\n            },\n            \"unit_of_measure\": \"QUANTITY\"\n        }\n    ],\n    \"configuration\": {\n        \"partial_payment\": {\n            \"allow_partial_payment\": true,\n            \"minimum_amount_due\": {\n                \"currency_code\": \"USD\",\n                \"value\": \"20.00\"\n            }\n        },\n        \"allow_tip\": true,\n        \"tax_calculated_after_discount\": true,\n        \"tax_inclusive\": false\n    },\n    \"amount\": {\n        \"breakdown\": {\n            \"custom\": {\n                \"label\": \"Packing Charges\",\n                \"amount\": {\n                    \"currency_code\": \"USD\",\n                    \"value\": \"10.00\"\n                }\n            },\n            \"shipping\": {\n                \"amount\": {\n                    \"currency_code\": \"USD\",\n                    \"value\": \"10.00\"\n                },\n                \"tax\": {\n                    \"name\": \"Sales Tax\",\n                    \"percent\": \"7.25\"\n                }\n            },\n            \"discount\": {\n                \"invoice_discount\": {\n                    \"percent\": \"5\"\n                }\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/v2/invoicing/invoices",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"invoicing",
+						"invoices"
+					]
+				},
+				"description": "Creates a draft invoice. To move the invoice from a draft to payable state, you must <a href=\"#invoices_send\">send the invoice</a>.<br/><br/>In the JSON request body, include invoice details including merchant information. The <code>invoice</code> object must include an <code>items</code> array.<blockquote><strong>Note:</strong> The merchant that you specify in an invoice must have a PayPal account in good standing.</blockquote>."
+			},
+			"response": []
+		},
+		{
+			"name": "Obtención de factura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code es 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/v2/invoicing/invoices/:invoice_id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v2",
+						"invoicing",
+						"invoices",
+						":invoice_id"
+					],
+					"variable": [
+						{
+							"key": "invoice_id",
+							"value": "{{invoice_id}}"
+						}
+					]
+				},
+				"description": "Shows details for an invoice, by ID."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "invoice_id",
+			"value": ""
+		},
+		{
+			"key": "invoice_payment_id",
+			"value": ""
+		}
+	]
+}
