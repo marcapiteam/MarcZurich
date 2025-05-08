@@ -25,4 +25,4 @@ Este proyecto es una automatización de pruebas para un endpoint de registro uti
 
 Se ha realizado con la api publica de pay-pal, en ello encontrareis dos archivos la colección de postman y el enviroment. Nota: es necesario realizar las dos importaciones.
 
-Se observa un flujo continuo donde se extrae datos ficticios de una persona y seguidamente se genera un token para generar una factura con los datos extraidos de la petición anterior. (si quereis que realize un script en una sola petición me lo comunicais).
+Se observa un flujo continuo donde se extrae datos ficticios de una persona y seguidamente se genera un token para generar una factura con los datos extraidos de las peticiones anteriores. (si quereis que realice un script en una sola petición me lo comunicais).
