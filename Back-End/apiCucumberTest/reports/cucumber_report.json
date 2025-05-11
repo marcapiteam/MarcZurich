@@ -1,0 +1,140 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "registro-en-mockapi;registro-exitoso-con-datos-válidos",
+        "keyword": "Scenario",
+        "line": 3,
+        "name": "Registro exitoso con datos válidos",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "que tengo los datos de registro válidos",
+            "match": {
+              "location": "steps/registro.steps.ts:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 856918
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "envío una solicitud de registro a la API",
+            "match": {
+              "location": "steps/registro.steps.ts:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 450404089
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 6,
+            "name": "debería recibir un estado 201",
+            "match": {
+              "location": "steps/registro.steps.ts:41"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 1314964,
+              "error_message": "AssertionError\n    + expected - actual\n\n    -400\n    +201\n\n    at World.<anonymous> (/Users/marc/Desktop/Back-End/apiCucumberTest/steps/registro.steps.ts:42:34)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "la respuesta debería contener un json válido",
+            "match": {
+              "location": "steps/registro.steps.ts:54"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "registro-en-mockapi;registro-fallido-con-datos-inválidos",
+        "keyword": "Scenario",
+        "line": 9,
+        "name": "Registro fallido con datos inválidos",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 10,
+            "name": "que tengo los datos de registro inválidos",
+            "match": {
+              "location": "steps/registro.steps.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 99472
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 11,
+            "name": "envío una solicitud de registro a la API con datos inválidos",
+            "match": {
+              "location": "steps/registro.steps.ts:33"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 123409681
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 12,
+            "name": "debería recibir un estado 400",
+            "match": {
+              "location": "steps/registro.steps.ts:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 359659
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "la respuesta no muestra nada",
+            "match": {
+              "location": "steps/registro.steps.ts:50"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 290265
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "registro-en-mockapi",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Registro en MockAPI",
+    "tags": [],
+    "uri": "features/registro.feature"
+  }
+]
