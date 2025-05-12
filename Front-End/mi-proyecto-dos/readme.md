@@ -30,8 +30,3 @@ Feature: El usuario intenta enviar el formulario de contacto sin aceptar los té
     And no marco la casilla "Acepto los términos legales"
     And hago clic en el botón "Enviar"
     Then debería ver un mensaje de error "Debes aceptar los términos legales para continuar"
-
-
-```ts
-await HomePage.login('4444444X', 'Sabadell');
-await expect(HomePage.cajaRoja).toBeDisplayed();
